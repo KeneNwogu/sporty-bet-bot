@@ -14,7 +14,7 @@ def format_data(data):
         text += f"GAME PLAYED: {game['game_played']} \n"
         if game.get('win_probability'):
             text += f"_Win Probability_: " \
-                    f"*{round(float(game['win_probability']), 3) * 100}%* \n".replace('.', '\.')
+                    f"*{round(round(float(game['win_probability']), 3) * 100, 2)}%* \n".replace('.', '\.')
 
         text += "\n\n"
 
