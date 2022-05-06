@@ -54,10 +54,10 @@ def get_games(bet_code: str, user_id: str):
         # print(len(outcome["markets"][0]["outcomes"]))
         try:
             data["game_played"] = outcome["markets"][0]["outcomes"][0]["desc"]
-            data["is_winning"] = outcome["markets"][0]["outcomes"][0].get("isWinning")
+            data["win_probability"] = outcome["markets"][0]["outcomes"][0].get("probability")
         except IndexError:
-            data["game_played"] = "Error"
-            data["is_winning"] = "Error"
+            data["game_played"] = None
+            data["win_probability"] = None
         else:
             games_details.append(data)
 

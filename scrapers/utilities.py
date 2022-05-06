@@ -12,12 +12,7 @@ def format_data(data):
         text += f"Minutes Played: {game['time']}\n"
         text += f"_{game['status']}_\n"
         text += f"GAME PLAYED: {game['game_played']} \n"
-        if game['is_winning'] and game['is_winning'] != 'Error':
-            text += f"_Game Status_: *Winning* \n"
-        elif not game['is_winning'] and game['is_winning'] != 'Error':
-            text += f"_Game Status_: *Losing* \n"
-        else:
-            text += f"_Game Status_: *null* \n"
+        text += f"_Win Probability_: *{game['win_probability']}* \n"
 
         text += "\n\n"
 
