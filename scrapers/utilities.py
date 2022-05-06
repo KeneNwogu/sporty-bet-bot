@@ -12,7 +12,7 @@ def format_data(data):
         text += f"Minutes Played: {game['time']}\n"
         text += f"_{game['status']}_\n"
         text += f"GAME PLAYED: {game['game_played']} \n"
-        text += f"_Win Probability_: *{game['win_probability']}* \n"
+        text += f"_Win Probability_: *{round(float(game['win_probability']), 2)}* \n"
 
         text += "\n\n"
 
