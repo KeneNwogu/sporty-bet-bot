@@ -32,7 +32,7 @@ def start(update, context):
         })
     welcome = welcome_text(user_["first_name"])
     context.bot.send_message(
-        chat_id=user_['first_name'],
+        chat_id=user_['id'],
         text=welcome,
         parse_mode='MarkdownV2'
     )
