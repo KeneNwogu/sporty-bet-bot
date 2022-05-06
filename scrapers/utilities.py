@@ -32,7 +32,7 @@ def welcome_text(username):
     text += 'On selecting a valid sporty bet code, The current state of the ticket would be displayed. Then ' \
             'subsequent update messages would be broadcast to you. \n\n'
     text += 'Thank you for using this bot, Good luck to your games! ;)'
-    return escape_markdown(text)
+    return text
 
 
 def format_markdown_text(text):
