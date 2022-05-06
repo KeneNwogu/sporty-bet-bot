@@ -2,6 +2,7 @@ APScheduler==3.6.3
 cachetools==4.2.2
 certifi==2021.5.30
 charset-normalizer==2.0.4
+dnspython==2.2.1
 idna==3.2
 pymongo==4.1.1
 python-telegram-bot==13.6

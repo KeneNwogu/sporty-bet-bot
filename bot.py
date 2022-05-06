@@ -8,7 +8,7 @@ from database import users, games
 from jobs import check_if_game_has_changed
 from scrapers import scraper, utilities
 
-PORT = os.environ.get('PORT', 5000)
+PORT = int(os.environ.get('PORT', 5000))
 TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', 'fALSEvaLuE')
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
