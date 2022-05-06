@@ -1,0 +1,45 @@
+{
+  "eventId":"sr:match:27639280",
+  "productStatus":"0#0",
+  "estimateStartTime":1624543200000,
+  "status":4,
+  "setScore":"5:0",
+  "gameScore":["2:0","3:0"],
+  "period":"0",
+  "matchStatus":"Ended",
+  "playedSeconds":"90:00",
+  "homeTeamName":"FC Barcelona",
+  "awayTeamName":"Sporting de Huelva",
+  "sport":{
+    "id":"sr:sport:1",
+    "name":"Football",
+    "category":{
+      "id":"sr:category:32",
+      "name":"Spain",
+      "tournament":{
+        "id":"sr:tournament:1127",
+        "name":"Primera Division Women",
+      },
+    },
+  },
+  "markets":[
+    {
+      "id":"18",
+      "specifier":"total=3.5",
+      "product":1,
+      "desc":"Over/Under",
+      "status":3,
+      "favourite":0,
+      "outcomes":[
+      {
+        "id":"12",
+        "odds":"2.25",
+        "probability":"0.3941920660",
+        "isActive":1,
+        "desc":"Over 3.5",
+        "isWinning":1,
+        "refundFactor":0.0}]
+      }
+  ],
+  "bookingStatus":"Unavailable"
+}
