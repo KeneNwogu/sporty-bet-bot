@@ -12,8 +12,9 @@ def format_data(data):
         text += f"Minutes Played: {game['time']}\n"
         text += f"_{game['status']}_\n"
         text += f"GAME PLAYED: {game['game_played']} \n"
-        text += f"_Win Probability_: " \
-                f"*{round(float(game['win_probability']), 1) if game.get('win_probability') else ''}%* \n"
+        if game.get('win_probability'):
+            text += f"_Win Probability_: " \
+                    f"*{round(float(game['win_probability']), 3) * 100}%* \n".replace('.', '\.')
 
         text += "\n\n"
 
