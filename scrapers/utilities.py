@@ -27,9 +27,9 @@ def format_data(data):
 def welcome_text(username):
     text = ''
     text += f'Welcome *{username}* \n'
-    text += 'I will help you keep track of all your sporty games\. '
-    text += "To set a game to be tracked, select the /check_bet command. You'd be asked to input the sporty code\. \n"
-    text += 'On selecting a valid sporty bet code, The current state of the ticket would be displayed\. Then ' \
-            'subsequent update messages would be broadcasted to you\. \n\n'
+    text += 'I will help you keep track of all your sporty games. '
+    text += "To set a game to be tracked, select the /check_bet command. You'd be asked to input the sporty code. \n"
+    text += 'On selecting a valid sporty bet code, The current state of the ticket would be displayed. Then ' \
+            'subsequent update messages would be broadcasted to you. \n\n'
     text += 'Thank you for using this bot, Good luck to your games! ;)'
-    return text.replace('.', '/.')
+    return text.replace('.', '\.')
