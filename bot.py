@@ -8,7 +8,7 @@ from database import users, games
 from jobs import check_if_game_has_changed
 from scrapers import scraper, utilities
 
-PORT = int(os.environ.get('PORT', 5000))
+PORT = int(os.environ.get('PORT', '8443'))
 TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', 'fALSEvaLuE')
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -98,8 +98,8 @@ def main():
 
     updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
-                          url_path=TOKEN)
-    updater.bot.setWebhook('https://sporty-bet-bot.herokuapp.com/' + TOKEN)
+                          url_path=TOKEN,
+                          webhook_url='https://sporty-bet-bot.herokuapp.com/' + TOKEN)
     updater.idle()
 
 
