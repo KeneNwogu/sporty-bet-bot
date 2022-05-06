@@ -7,6 +7,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from database import users, games
 from jobs import check_if_game_has_changed
 from scrapers import scraper, utilities
+from scrapers.utilities import welcome_text
 
 PORT = int(os.environ.get('PORT', '8443'))
 TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', 'fALSEvaLuE')
@@ -22,13 +23,19 @@ def start(update, context):
     """Message user on /start"""
     user_ = update.message.from_user
     # save user to db
-    users.insert_one({
-        "chat_id": user_['id'],
-        "username": user_['first_name'],
-        "last_command": "",
-        "games": []
-    })
-    update.message.reply_text(f'Hello {user_["first_name"]}')
+    if not users.find_one({"chat_id": user_['id']}):
+        users.insert_one({
+            "chat_id": user_['id'],
+            "username": user_['first_name'],
+            "last_command": "",
+            "games": []
+        })
+    welcome = welcome_text(user_["first_name"])
+    context.bot.send_message(
+        chat_id=user_['first_name'],
+        text=welcome,
+        parse_mode='MarkdownV2'
+    )
 
 
 def check_games(update, context):
