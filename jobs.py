@@ -11,8 +11,8 @@ def check_if_game_has_changed():
         outcomes = games_object['data']['outcomes']
 
         for outcome in outcomes:
-            current_home_score = outcome.get('setScore').split(':')[0]
-            current_away_score = outcome.get('setScore').split(':')[1]
+            current_home_score = outcome.get('setScore', '0:0').split(':')[0]
+            current_away_score = outcome.get('setScore', '0:0').split(':')[1]
             current_status = outcome.get("matchStatus")
 
             event = events.find_one({'match_id': outcome.get('eventId')})

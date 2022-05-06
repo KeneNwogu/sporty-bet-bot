@@ -19,8 +19,8 @@ def get_games(bet_code: str, user_id: str):
                 'tickets': [bet_code],
                 'home': outcome["homeTeamName"],
                 'away': outcome["awayTeamName"],
-                'home_score': outcome.get('setScore').split(':')[0],
-                'away_score': outcome.get('setScore').split(':')[1],
+                'home_score': outcome.get('setScore', '0:0').split(':')[0],
+                'away_score': outcome.get('setScore', '0:0').split(':')[1],
                 'status': outcome.get("matchStatus"),
                 'users': [{'chat_id': user_id, 'tickets': [bet_code]}]
             })

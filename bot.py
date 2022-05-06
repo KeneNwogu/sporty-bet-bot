@@ -49,7 +49,7 @@ def check_games(update, context):
         # save game id to users and games collections
         users.update_one({'chat_id': chat_id}, {"$addToSet": {"games": ticker}})
         if not games.find_one({'ticket': ticker}):
-            games.insert_one({'ticket': ticker, 'users': [], 'finished': False})
+            games.insert_one({'ticket': ticker, 'users': [chat_id], 'finished': False})
         else:
             games.update_one({'ticket': ticker}, {"$addToSet": {'users': chat_id}})
 
