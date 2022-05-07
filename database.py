@@ -9,3 +9,4 @@ db = client.sporty_bot
 users = db.users
 games = db.games
 events = db.events
+issues = db.issues

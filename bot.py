@@ -4,7 +4,7 @@ import os
 import telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
-from database import users, games
+from database import users, games, issues
 from jobs import check_if_game_has_changed
 from scrapers import scraper, utilities
 from scrapers.utilities import welcome_text
@@ -60,7 +60,15 @@ def check_games(update, context):
             text=text,
             parse_mode='MarkdownV2'
         )
-    # update.message.reply_text(update.message.text)
+    elif user_last_command == 'create_issue':
+        issue = update.message.text
+        issues.insert_one({
+            'user': chat_id,
+            'issue': issue,
+            'resolved': False
+        })
+        update.message.reply_text("Thanks for the response. It'll be duly considered and "
+                                  "you'll be notified when it is resolved")
 
 
 def get_user_game(update, context):
@@ -71,6 +79,18 @@ def get_user_game(update, context):
             }
         })
         update.message.reply_text("Enter Sporty Code: ")
+    else:
+        update.message.reply_text("You need to press the start command to use me.")
+
+
+def create_issue(update, context):
+    if users.find_one({'chat_id': update.message.chat_id}):
+        users.update_one({'chat_id': update.message.chat_id}, {
+            "$set": {
+                "last_command": 'create_issue'
+            }
+        })
+        update.message.reply_text('Please drop your issue (complaint, enquiry or suggestion) below: ')
     else:
         update.message.reply_text("You need to press the start command to use me.")
 
@@ -97,6 +117,7 @@ def main():
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('echo', check_games))
     dp.add_handler(CommandHandler('check_bet', get_user_game))
+    dp.add_handler(CommandHandler('create_issue', create_issue))
 
     dp.add_handler(MessageHandler(Filters.text, check_games))
     dp.add_error_handler(error)
