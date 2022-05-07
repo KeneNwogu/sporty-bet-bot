@@ -57,8 +57,7 @@ def check_games(update, context):
         text = utilities.format_data(retrieved_games)
         context.bot.send_message(
             chat_id=chat_id,
-            text=text,
-            parse_mode='MarkdownV2'
+            text=text
         )
     elif user_last_command == 'create_issue':
         issue = update.message.text

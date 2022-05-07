@@ -6,15 +6,15 @@ from telegram.utils.helpers import escape_markdown
 def format_data(data):
     text = ""
     for game in data:
-        text += f"*LEAGUE: {game['tournament']}* \n"
-        text += f"*{game['home']} v {game['away']}*\n"
+        text += f"LEAGUE: {game['tournament']} \n"
+        text += f"{game['home']} v {game['away']}\n"
         text += f"SCORES: {game['scores']}\n"
         text += f"Minutes Played: {game['time']}\n"
-        text += f"_{game['status']}_\n"
+        text += f"{game['status']}\n"
         text += f"GAME PLAYED: {game['game_played']} \n"
         if game.get('win_probability'):
             text += f"_Win Probability_: " \
-                    f"*{round(round(float(game['win_probability']), 3) * 100, 2)}%* \n".replace('.', '\.')
+                    f"{round(round(float(game['win_probability']), 3) * 100, 2)}% \n"
 
         text += "\n\n"
 
