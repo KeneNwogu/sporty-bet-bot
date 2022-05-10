@@ -7,7 +7,16 @@ def check_if_game_has_changed():
     tickets = list(games.find({'finished': False}))
     for ticket in list(map(lambda x: x.get('ticket'), tickets)):
         games_url = url + ticket
-        games_object = requests.get(games_url).json()
+        games_object = requests.get(games_url).json() or {}
+
+        if games_object.get('innerMsg') == "Invalid":
+            games.update_one({'ticket': ticket}, {'$set': {'finished': True}})
+            continue
+
+        if not (games_object and games_object.get('data')):
+            games.update_one({'ticket': ticket}, {'$set': {'finished': True}})
+            continue
+
         outcomes = games_object['data']['outcomes']
 
         for outcome in outcomes:
@@ -34,6 +43,7 @@ def check_if_game_has_changed():
                 text += f'SCORES: {current_home_score} : {current_away_score} \n'
                 text += f'STATUS: {current_status} \n'
                 text += f'TIME: *{outcome.get("playedSeconds")}* \n\n'
+                text += 'TICKETS: '
 
                 users = list(map(lambda x: x.get('chat_id'), event.get('users')))
                 from bot import updater
@@ -43,8 +53,11 @@ def check_if_game_has_changed():
                     user_event_tickets = ' '
                     if len(user_tickets) > 0:
                         user_event_tickets = user_event_tickets.join(user_tickets[0].get('tickets'))
-                    text += f'TICKETS: {user_event_tickets} \n'
-                    updater.bot.send_message(user, text=text, parse_mode='MarkdownV2')
+                    text += f'{user_event_tickets}'
+                    try:
+                        updater.bot.send_message(user, text=text, parse_mode='MarkdownV2')
+                    except:
+                        pass
         # check if all outcomes are Ended for game and mark game as finished
         if all([x.get('matchStatus') == 'Ended' for x in outcomes]):
             games.update_one({'ticket': ticket}, {

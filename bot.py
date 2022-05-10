@@ -53,12 +53,19 @@ def check_games(update, context):
         else:
             games.update_one({'ticket': ticker}, {"$addToSet": {'users': chat_id}})
 
-        retrieved_games = scraper.get_games(ticker, chat_id)
-        text = utilities.format_data(retrieved_games)
-        context.bot.send_message(
-            chat_id=chat_id,
-            text=text
-        )
+        try:
+            retrieved_games = scraper.get_games(ticker, chat_id)
+        except ValueError:
+            context.bot.send_message(
+                chat_id=chat_id,
+                text='Invalid Game Code'
+            )
+        else:
+            text = utilities.format_data(retrieved_games)
+            context.bot.send_message(
+                chat_id=chat_id,
+                text=text
+            )
     elif user_last_command == 'create_issue':
         issue = update.message.text
         issues.insert_one({

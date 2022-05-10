@@ -7,6 +7,10 @@ url = "https://www.sportybet.com/api/ng/orders/share/"
 def get_games(bet_code: str, user_id: str):
     games_url = url + bet_code
     games_object = requests.get(games_url).json()
+
+    if games_object.get('innerMsg') == "Invalid":
+        raise ValueError('Invalid Game Code')
+
     outcomes = games_object['data']['outcomes']
     games_details = []
 
